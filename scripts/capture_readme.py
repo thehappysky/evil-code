@@ -78,7 +78,10 @@ async def main():
         else:
             raise RuntimeError("Demo response did not reach the transcript")
         await pilot.pause(0.2)
-        print(app.save_screenshot("tui-demo.svg", path=str(output)))
+        filename = Path(app.save_screenshot("tui-demo.svg", path=str(output)))
+        svg = filename.read_text(encoding="utf-8")
+        filename.write_text("\n".join(line.rstrip() for line in svg.splitlines()) + "\n", encoding="utf-8")
+        print(filename)
 
 
 if __name__ == "__main__":
