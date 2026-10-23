@@ -91,6 +91,7 @@ from code_agent.tools.builtin.task import TaskInput, TaskTool
 from code_agent.tools.builtin.web_fetch import WebFetchInput, web_fetch
 from code_agent.tools.builtin.web_search import WebSearchInput, WebSearchTool
 from code_agent.tools.registry import ToolRegistry
+from code_agent.runtime import open_runtime
 
 logger = logging.getLogger(__name__)
 
@@ -344,6 +345,80 @@ def build_subagent_factory(
         oauth_refresh_cb=oauth_refresh_cb,
         permission_manager=permission_manager,
         plan_tracker=plan_tracker,
+    )
+
+
+def open_agent_runtime(
+    args: argparse.Namespace,
+    session: Session,
+    config: ProviderConfig,
+    *,
+    phase2_modules: dict | None = None,
+    trace: TraceWriter | None = None,
+    client_factory=None,
+    agent_factory=None,
+    agent_options: dict | None = None,
+):
+    """Shared parent-agent composition for CLI and TUI.
+
+    The runtime owns the client. Session-wide services (sandbox, memory,
+    MCP connection) are borrowed and owned by the entry-point exit stack.
+    TUI supplies only its Agent adapter and approval presentation options.
+    """
+    phase2 = phase2_modules or {}
+    mcp_client = phase2.get("mcp_client")
+
+    def create_tools():
+        return build_tools(
+            skill_manager=phase2.get("skill_manager"),
+            sandbox_manager=phase2.get("sandbox_mgr"),
+            allow_sandbox_fallback=False,
+            plugin_tools=phase2.get("plugin_tools"),
+            plan_tracker=phase2.get("plan_tracker"),
+            web_search_config=config,
+            todo_controller=phase2.get("todo_controller"),
+            subagent_factory=build_subagent_factory(
+                args, config, sandbox_manager=phase2.get("sandbox_mgr"),
+                permission_manager=phase2.get("permission_mgr"),
+                plan_tracker=phase2.get("plan_tracker"),
+            ),
+            finalize=mcp_client is None,
+        )
+
+    async def prepare_tools(tools):
+        if mcp_client is None:
+            return
+        try:
+            from code_agent.mcp.adapter import register_mcp_tools
+            count = await register_mcp_tools(tools, mcp_client)
+            logger.info("Registered %d MCP tools", count)
+        except Exception:
+            logger.warning("MCP tool registration failed", exc_info=True)
+        finally:
+            tools.finalize()
+
+    def create_agent(ca_session, client, tools):
+        if agent_factory is None:
+            return build_agent(
+                args, ca_session, client, tools,
+                phase2_modules=phase2, trace=trace,
+            )
+        hooks = build_hooks(
+            args, ca_session, client, tools,
+            phase2_modules=phase2, include_permission_hook=False,
+        )
+        return agent_factory(
+            session=ca_session, client=client, tools=tools,
+            max_turns=args.max_turns, hooks=hooks, trace=trace,
+            **(agent_options or {}),
+        )
+
+    return open_runtime(
+        session,
+        create_client=client_factory or (lambda: build_resilient_client(config, oauth_refresh_cb)),
+        create_tools=create_tools,
+        prepare_tools=prepare_tools,
+        create_agent=create_agent,
     )
 
 
@@ -615,6 +690,17 @@ def build_hooks(
     hooks: list[AgentHook] = []
     phase2 = phase2_modules or {}
 
+    # [GRD-03] Backfill tool safety classification from registry to the
+    # permission manager. The registry (tools) is finalized by this point,
+    # so its safety metadata is authoritative. PermissionManager was
+    # constructed earlier in init_phase2_modules with hardcoded fallbacks.
+    if phase2 and "permission_mgr" in phase2:
+        pm = phase2["permission_mgr"]
+        pm.configure_tool_safety(
+            read_tools=tools.names_by_safety("read"),
+            control_tools=tools.names_by_safety("control"),
+        )
+
     # Phase 2: Memory hook (cross-session memory injection)
     memory_index = phase2.get("memory_index")
     if memory_index is not None:
@@ -739,16 +825,6 @@ def build_agent(
     This function is the ONLY integration point — Agent source code
     never changes.
     """
-    # [GRD-03] Backfill tool safety classification from registry to the
-    # permission manager. The registry (tools) is finalized by this point,
-    # so its safety metadata is authoritative. PermissionManager was
-    # constructed earlier in init_phase2_modules with hardcoded fallbacks.
-    if phase2_modules and "permission_mgr" in phase2_modules:
-        pm = phase2_modules["permission_mgr"]
-        pm.configure_tool_safety(
-            read_tools=tools.names_by_safety("read"),
-            control_tools=tools.names_by_safety("control"),
-        )
     hooks = build_hooks(
         args, session, client, tools, phase2_modules=phase2_modules,
     )

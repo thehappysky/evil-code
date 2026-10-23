@@ -34,6 +34,7 @@ async def test_headless_routes_auto_approved_command_to_shared_sandbox(monkeypat
 
     args = build_parser().parse_args(["check", "--cwd", str(tmp_path)])
     client = MockChatClient()
+    client.close = AsyncMock()
     client.set_responses([
         make_tool_call_response("c1", "shell_exec", json.dumps({"command": "python -c pass"})),
         make_text_response("done"),
@@ -53,6 +54,7 @@ async def test_headless_routes_auto_approved_command_to_shared_sandbox(monkeypat
     assert calls == ["python -c pass"]
     assert any(m.get("content") == "sandbox result" for m in client.call_history[1]["messages"])
     FakeSandbox.close.assert_awaited_once()
+    client.close.assert_awaited_once()
 
 
 async def test_tui_builds_real_runner_and_subagent_factory(monkeypatch, tmp_path):
@@ -62,6 +64,7 @@ async def test_tui_builds_real_runner_and_subagent_factory(monkeypatch, tmp_path
     provider_store = stores.JsonProviderSettingsStore(tmp_path / "providers.json")
     ui_store = stores.JsonUiPreferencesStore(tmp_path / "ui.json")
     client = MockChatClient()
+    client.close = AsyncMock()
     client.set_responses([make_text_response("TUI ready")])
     results = []
 
@@ -84,6 +87,7 @@ async def test_tui_builds_real_runner_and_subagent_factory(monkeypatch, tmp_path
     assert await main._run_tui(args, Session("Test"), {"permission_mgr": PermissionManager()}, ProviderConfig(api_key="test")) == 0
     assert client.call_history
     assert results
+    client.close.assert_awaited_once()
 
 
 async def test_environment_off_overrides_sandbox_flag(monkeypatch, tmp_path):

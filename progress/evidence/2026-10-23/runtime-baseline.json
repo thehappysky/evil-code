@@ -1,0 +1,18 @@
+{
+  "label": "runtime-baseline",
+  "base_commit": "07185c0c59e50d1c970374cf44c9f43f9ceb0db4",
+  "python": "3.13.9",
+  "platform": "Windows",
+  "tests": 1081,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 1081,
+  "junit_seconds": 99.86,
+  "pytest_seconds": 100.46,
+  "coverage": {
+    "covered_lines": 7697,
+    "num_statements": 10507,
+    "percent_covered": 73.25592462168079
+  }
+}
