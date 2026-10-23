@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "code-agent"
+version = "0.1.0"
+description = "Python AI Coding Agent - think, act, observe"
+requires-python = ">=3.11"
+dependencies = [
+    # Phase 1:
+    "pydantic>=2.7.0",
+    "httpx>=0.27.0",
+    "markdownify>=0.13.0",
+    # Phase 2:
+    "aiofiles>=23.0",
+    "aiosqlite>=0.20",
+    "blake3>=0.4",
+    # Phase 3:
+    "rich>=13.0",
+    "pygments>=2.17",
+    "pyyaml>=6.0",
+    # Phase 4:
+    "mcp>=1.12",
+    "docker>=7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-httpx>=0.30.0",
+    "pytest-cov>=5.0",
+]
+tui = [
+    "textual>=1.0,<2",
+    "rich>=13.0",
+    "pygments>=2.17",
+]
+sandbox = [
+    "docker>=7.0",
+]
+
+[project.scripts]
+code-agent = "code_agent.cli.main:main"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "use_real_config: run a test against the real config_store, bypassing the autouse mock_no_config_file fixture",
+]
+# Coverage is a hard gate: the suite fails if total line coverage of code_agent
+# drops below this. Kept at 60% — the remaining uncovered code is mostly the
+# large TUI screen-handling module and the argparse CLI entry.
+addopts = "--cov=code_agent --cov-report=term-missing --cov-fail-under=60"

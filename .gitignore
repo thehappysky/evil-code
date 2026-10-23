@@ -1,0 +1,40 @@
+# Python environments and generated files
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Tests and coverage
+.pytest_cache/
+.pytest-tmp/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+*.log
+
+# Local editors and agent settings
+.idea/
+.vscode/
+.claude/
+.agents/
+.DS_Store
+Thumbs.db
+
+# Credentials and local runtime data
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.evil-code/
+.code-agent/
+credentials*.json
+settings.local.json
+
+# Scratch files used for manual verification
+test_workspace/
