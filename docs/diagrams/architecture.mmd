@@ -1,0 +1,14 @@
+flowchart TB
+    CLI[CLI / REPL] --> COMPOSE["共享父代理装配<br/>cli/assembly.py"]
+    TUI[TUI 与审批展示适配器] --> COMPOSE
+    COMPOSE --> OWN["客户端生命周期<br/>runtime/session.py"]
+    CHILD["子代理<br/>有限工具集与继承权限"] --> OWN
+    OWN --> AGENT["Agent 推理循环<br/>core/agent.py"]
+    AGENT <--> API["模型协议层<br/>三种后端协议"]
+    AGENT --> HOOKS["Hook 链<br/>计划 / 权限 / 记忆<br/>保存 / 日志"]
+    AGENT --> TOOLS[工具注册与执行]
+    TOOLS --> FS[宿主机文件工具]
+    TOOLS --> SHELL[命令路由与 Docker 沙箱]
+    TOOLS --> TASK[task 子代理工具]
+    TASK --> CHILD
+    HOOKS <--> DATA["本地上下文<br/>JSONL / MEMORY.md / SQLite"]

@@ -1,0 +1,18 @@
+{
+  "label": "readme-tests-before",
+  "base_commit": "31e3aabfb3fe6376d0b1028e70acca9d1dd9c199",
+  "python": "3.13.9",
+  "platform": "Windows",
+  "tests": 1090,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 1090,
+  "junit_seconds": 98.647,
+  "pytest_seconds": 99.17,
+  "coverage": {
+    "covered_lines": 7750,
+    "num_statements": 10540,
+    "percent_covered": 73.52941176470588
+  }
+}

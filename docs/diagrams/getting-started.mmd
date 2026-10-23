@@ -1,0 +1,9 @@
+flowchart LR
+    A[安装 Python 3.11+] --> B[创建隔离环境]
+    B --> C[安装 dev 与 tui 依赖]
+    C --> D[配置模型服务]
+    D --> E{选择入口}
+    E --> F[TUI 交互界面]
+    E --> G[CLI 单次任务 / REPL]
+    F --> H[提交任务并查看结果]
+    G --> H
