@@ -1,0 +1,7 @@
+{
+  "svg_trailing_whitespace_before": 1,
+  "svg_trailing_whitespace_after": 0,
+  "application_and_tests_changed": false,
+  "full_test_evidence_reused": "readme-tests-after.json",
+  "reason": "Only whitespace outside SVG text and generator normalization changed."
+}

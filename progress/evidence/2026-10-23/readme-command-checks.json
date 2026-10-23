@@ -1,0 +1,20 @@
+{
+  "--help": {
+    "exit_code": 0,
+    "stdout_bytes": 3178
+  },
+  "config --help": {
+    "exit_code": 0,
+    "stdout_bytes": 1004
+  },
+  "sandbox --help": {
+    "exit_code": 0,
+    "stdout_bytes": 383
+  },
+  "draft --help": {
+    "exit_code": 0,
+    "stdout_bytes": 247
+  },
+  "pip_check": "No broken requirements found.",
+  "product_code_unchanged_in_docs_batch": true
+}

@@ -25,5 +25,7 @@ jobs:
         run: python -m pip install -e ".[dev,tui]"
       - name: Check installed dependencies
         run: python -m pip check
+      - name: Check README links, images and diagram sources
+        run: python scripts/check_readme.py
       - name: Run tests and coverage gate
         run: python -m pytest -q --tb=short

@@ -1,0 +1,23 @@
+sequenceDiagram
+    actor U as 用户
+    participant UI as CLI 或 TUI
+    participant R as Runtime
+    participant A as Agent
+    participant M as 模型接口
+    participant T as Hook 与工具
+    U->>UI: 提交任务
+    UI->>R: 创建本次运行资源
+    R->>A: 注入客户端、工具和策略
+    loop 直到完成或达到轮数上限
+        A->>M: 上下文与工具定义
+        M-->>A: 流式文本或工具调用
+        alt 需要调用工具
+            A->>T: 检查计划模式与权限
+            T-->>A: 工具结果或拒绝原因
+            A->>A: 将结果写入会话
+        else 文本回复完成
+            A-->>UI: 展示结果
+        end
+    end
+    UI->>R: 退出或取消，释放本次资源
+    Note over UI,R: CLI 任务结束时关闭；TUI 的绑定在界面退出时统一关闭

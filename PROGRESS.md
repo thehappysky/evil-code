@@ -1,5 +1,8 @@
 # Code Agent - Implementation Progress
 
+> Current increment: runtime batch A passed (1081 → 1090 tests; coverage 73.26% → 73.53%). README batch B also passed: 1090 tests, 73.53% coverage, one UI image and four diagrams.
+> Evidence and acceptance decisions: [progress log](progress/runtime-docs-2026-10-23.md).
+
 > Last updated: 2026-10-23
 > Status: Core features implemented; stabilization in progress. See README.md for current usage.
 > The phase narratives and architecture diagram below are historical records, not evidence of current live-service verification.

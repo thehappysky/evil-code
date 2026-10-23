@@ -1,0 +1,52 @@
+FF.FFFF                                                                  [100%]
+================================== FAILURES ===================================
+________ test_headless_routes_auto_approved_command_to_shared_sandbox _________
+tests\test_cli\test_startup.py:57: in test_headless_routes_auto_approved_command_to_shared_sandbox
+    client.close.assert_awaited_once()
+C:\ProgramData\anaconda3\Lib\unittest\mock.py:2364: in assert_awaited_once
+    raise AssertionError(msg)
+E   AssertionError: Expected mock to have been awaited once. Awaited 0 times.
+---------------------------- Captured stdout call -----------------------------
+done
+______________ test_tui_builds_real_runner_and_subagent_factory _______________
+tests\test_cli\test_startup.py:90: in test_tui_builds_real_runner_and_subagent_factory
+    client.close.assert_awaited_once()
+C:\ProgramData\anaconda3\Lib\unittest\mock.py:2364: in assert_awaited_once
+    raise AssertionError(msg)
+E   AssertionError: Expected mock to have been awaited once. Awaited 0 times.
+_________ test_failed_startup_releases_every_acquired_resource[tools] _________
+tests\test_cli\test_runtime_lifecycle.py:60: in test_failed_startup_releases_every_acquired_resource
+    client.close.assert_awaited_once()
+C:\ProgramData\anaconda3\Lib\unittest\mock.py:2364: in assert_awaited_once
+    raise AssertionError(msg)
+E   AssertionError: Expected mock to have been awaited once. Awaited 0 times.
+_________ test_failed_startup_releases_every_acquired_resource[agent] _________
+tests\test_cli\test_runtime_lifecycle.py:60: in test_failed_startup_releases_every_acquired_resource
+    client.close.assert_awaited_once()
+C:\ProgramData\anaconda3\Lib\unittest\mock.py:2364: in assert_awaited_once
+    raise AssertionError(msg)
+E   AssertionError: Expected mock to have been awaited once. Awaited 0 times.
+________ test_failed_startup_releases_every_acquired_resource[cancel] _________
+tests\test_cli\test_runtime_lifecycle.py:60: in test_failed_startup_releases_every_acquired_resource
+    client.close.assert_awaited_once()
+C:\ProgramData\anaconda3\Lib\unittest\mock.py:2364: in assert_awaited_once
+    raise AssertionError(msg)
+E   AssertionError: Expected mock to have been awaited once. Awaited 0 times.
+__________ test_failed_startup_releases_every_acquired_resource[mcp] __________
+tests\test_cli\test_runtime_lifecycle.py:55: in test_failed_startup_releases_every_acquired_resource
+    mcp_close.assert_awaited_once()
+C:\ProgramData\anaconda3\Lib\unittest\mock.py:2364: in assert_awaited_once
+    raise AssertionError(msg)
+E   AssertionError: Expected mock to have been awaited once. Awaited 0 times.
+---------------------------- Captured stdout call -----------------------------
+ready
+------------------------------ Captured log call ------------------------------
+WARNING  code_agent.cli.main:main.py:462 Failed to connect MCP server: connection failed
+=========================== short test summary info ===========================
+FAILED tests/test_cli/test_startup.py::test_headless_routes_auto_approved_command_to_shared_sandbox
+FAILED tests/test_cli/test_startup.py::test_tui_builds_real_runner_and_subagent_factory
+FAILED tests/test_cli/test_runtime_lifecycle.py::test_failed_startup_releases_every_acquired_resource[tools]
+FAILED tests/test_cli/test_runtime_lifecycle.py::test_failed_startup_releases_every_acquired_resource[agent]
+FAILED tests/test_cli/test_runtime_lifecycle.py::test_failed_startup_releases_every_acquired_resource[cancel]
+FAILED tests/test_cli/test_runtime_lifecycle.py::test_failed_startup_releases_every_acquired_resource[mcp]
+6 failed, 1 passed in 1.06s

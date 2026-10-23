@@ -1,0 +1,18 @@
+flowchart TD
+    CALL[模型请求工具调用] --> GATE{计划与权限检查是否通过}
+    GATE -- 否 --> ERROR[返回拒绝原因]
+    GATE -- 是 --> KIND{工具类型}
+    KIND -- 文件工具 --> HOST[在宿主机执行文件操作]
+    KIND -- shell_exec --> MODE{沙箱模式}
+    MODE -- off --> LOCAL[本机命令执行]
+    MODE -- auto --> CLASSIFY{命令分类}
+    CLASSIFY -- 安全白名单且路径安全 --> LOCAL
+    CLASSIFY -- 风险命令 --> DOCKER{Docker 是否可用}
+    MODE -- strict --> DOCKER
+    DOCKER -- 否 --> UNAVAILABLE[返回不可用错误，不回退本机]
+    DOCKER -- 是 --> TIER[clean / net / work 容器环境]
+    HOST --> RESULT[结果写回会话]
+    LOCAL --> RESULT
+    TIER --> RESULT
+    ERROR --> RESULT
+    UNAVAILABLE --> RESULT

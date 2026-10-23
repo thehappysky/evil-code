@@ -27,6 +27,7 @@ from code_agent.api.client_factory import build_resilient_client
 from code_agent.api.schemas import ProviderConfig
 from code_agent.core.agent import Agent
 from code_agent.core.session import Session
+from code_agent.runtime import open_runtime
 from code_agent.hooks.doom_loop_hook import DoomLoopHook
 from code_agent.hooks.phase3_hooks import PlanModeHook
 from code_agent.hooks.phase4_hooks import PermissionHook
@@ -93,35 +94,31 @@ def build_subagent_factory(
     ) -> str:
         # Reject unknown capability modes before allocating a client.
         capability_tool_names(capability_mode)
-        client = build_resilient_client(config, oauth_refresh_cb)
-        try:
-            session = Session(
-                system_prompt=SUBAGENT_PROMPTS.get(
-                    subagent_type, GENERAL_SUBAGENT_PROMPT,
-                ),
-            )
-            tools = build_tools_fn(
+        session = Session(
+            system_prompt=SUBAGENT_PROMPTS.get(subagent_type, GENERAL_SUBAGENT_PROMPT),
+        )
+        hooks = [DoomLoopHook(), PermissionHook(permission_manager)]
+        if plan_tracker is not None:
+            hooks.append(PlanModeHook(plan_tracker))
+        async with open_runtime(
+            session,
+            create_client=lambda: build_resilient_client(config, oauth_refresh_cb),
+            create_tools=lambda: build_tools_fn(
                 capability_mode=capability_mode,
                 sandbox_manager=sandbox_manager,
                 allow_sandbox_fallback=False,
-            )
-            hooks = [DoomLoopHook(), PermissionHook(permission_manager)]
-            if plan_tracker is not None:
-                hooks.append(PlanModeHook(plan_tracker))
-            agent = Agent(
-                session, client, tools,
-                max_turns=max_turns,
-                hooks=hooks,
-            )
+            ),
+            create_agent=lambda session, client, tools: Agent(
+                session, client, tools, max_turns=max_turns, hooks=hooks,
+            ),
+        ) as runtime:
             parts: list[str] = []
-            async for event in agent.run(prompt):
+            async for event in runtime.agent.run(prompt):
                 if event.kind == "text_delta" and event.text:
                     parts.append(event.text)
                 elif event.kind == "error" and event.text:
                     parts.append(f"\n[error] {event.text}")
             return "".join(parts).strip() or "(no response)"
-        finally:
-            await client.close()
 
     coordinator = SubagentCoordinator(spawn_subagent, max_depth=1)
     return coordinator.spawn
