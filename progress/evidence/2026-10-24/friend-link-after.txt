@@ -1,0 +1,14 @@
+{
+  "lines": 389,
+  "sections": 10,
+  "images": 1,
+  "mermaid_diagrams": 4,
+  "local_links_checked": 15,
+  "image_sizes": {
+    "docs/assets/tui-demo.png": [
+      1458,
+      977
+    ]
+  },
+  "errors": []
+}

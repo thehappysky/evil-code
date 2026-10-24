@@ -1,0 +1,9 @@
+{
+  "check": "README 静态校验",
+  "passed": 1,
+  "failed": 0,
+  "skipped": 0,
+  "coverage": null,
+  "seconds": 0.2002,
+  "python": "3.12.14"
+}
