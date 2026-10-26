@@ -12,7 +12,7 @@ async function main() {
   if (!run || !output) throw new Error('Expected run directory and PNG output path');
   const browser = await chromium.launch({channel: process.env.DOCS_BROWSER_CHANNEL || 'msedge', headless:true});
   try {
-    const page = await browser.newPage({viewport:{width:1200,height:1000},deviceScaleFactor:1});
+    const page = await browser.newPage({viewport:{width:1200,height:1100},deviceScaleFactor:1});
     await page.goto(pathToFileURL(path.resolve(run, 'report.html')).href);
     await page.evaluate(() => document.fonts.ready);
     const checks = await page.evaluate(() => ({

@@ -1,0 +1,1 @@
+{"mode": "live", "output": ".eval-runs\\live-core-corrected-20261026", "successes": 30, "recorded": 32, "planned": 32, "statuses": {"success": 30, "task_failure": 2}, "estimated_cost_cny": 0.2854752}

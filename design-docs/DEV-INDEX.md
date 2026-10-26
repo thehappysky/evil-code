@@ -2,6 +2,8 @@
 
 > Progressive disclosure: start from the roadmap, drill down to implementation details.
 
+2026-10-26 新增：[LLM / Agent 评测建设方案](LLM-Evaluation-Plan.md)、[操作手册与流程图](../docs/evaluation.md)、[真实实验与失败归因](../progress/evaluation-results-2026-10-26.md)。
+
 ---
 
 ## Document Map

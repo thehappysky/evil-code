@@ -372,6 +372,12 @@ python -m code_agent.evals run --mode noop --repeats 2 --output .eval-runs/noop
 
 离线参考执行 32/32、不操作反例 0/32，只证明评测流程能区分完成与未完成，**不代表大模型能力**。真实模型使用本机配置、显式价格表和请求前费用预留；原始轨迹默认留在本地，公开数据采用白名单汇总。代码题要求 Docker，环境不可用时记录基础设施问题，不在宿主机执行候选代码。当前结果仅代表四种文件工具的受限配置，未覆盖完整产品工具链。
 
+2026-10-26 真实开发集实测：本机配置的 DeepSeek V4 Pro 完成 **30/32（93.75%）**；两次文件迁移失败保留，分析发现读取工具没有呈现末尾换行。两轮真实实验合计估算 **0.352254 元**，低于 5 元授权。小样本分数不代表总体排名；Docker 代码题因引擎不可用，尚无真实容器成绩。
+
+![真实模型评测报告顶部，非模拟数据](docs/assets/evaluation-report.png)
+
+详见 [真实评测结果、分类数据与失败归因](progress/evaluation-results-2026-10-26.md)；完整 [HTML 报告](progress/evidence/2026-10-26/live-core-report.html) 与 [逐次 CSV](progress/evidence/2026-10-26/live-core-trials.csv) 可下载查看。图片来自实际生成的报告，重建脚本为 `scripts/capture_evaluation.cjs`。
+
 ## 项目结构与阅读顺序
 
 ```text
