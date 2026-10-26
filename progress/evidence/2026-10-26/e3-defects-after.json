@@ -1,0 +1,13 @@
+{
+  "label": "E3 两项问题修复后及评测回归",
+  "base_commit": "99513f42b815d9a2078e42a725b96c7dd34756a7",
+  "python": "3.12.6",
+  "platform": "Windows",
+  "tests": 45,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 45,
+  "junit_seconds": 4.955,
+  "pytest_seconds": 5.23
+}

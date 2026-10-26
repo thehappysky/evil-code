@@ -2,6 +2,7 @@
 
 import json
 import re
+from contextlib import aclosing
 from decimal import Decimal
 
 from code_agent.telemetry.usage import UsageTotals
@@ -76,18 +77,25 @@ class ObservedClient:
         usage = None
         settled = False
         try:
-            async for event in self.client.chat_stream(messages, tools, **kwargs):
-                if event.kind == "error":
-                    code = re.search(r"\b[45]\d\d\b", event.text or "")
-                    raise ModelFailure("http_" + code[0] if code else "stream_error")
-                if event.kind == "turn_end" and event.usage:
-                    usage = event.usage
-                    self.usage_calls += 1
-                    self.usage.accumulate(usage, self.model)
-                if event.kind == "turn_end" and self.ledger:
-                    settled = True
-                    self.ledger.settle(reserve, usage)
-                yield event
+            async with aclosing(self.client.chat_stream(messages, tools, **kwargs)) as stream:
+                async for event in stream:
+                    if event.kind == "error":
+                        code = re.search(r"\b[45]\d\d\b", event.text or "")
+                        raise ModelFailure("http_" + code[0] if code else "stream_error")
+                    if event.kind == "turn_end":
+                        if event.usage:
+                            usage = event.usage
+                            self.usage_calls += 1
+                            self.usage.accumulate(usage, self.model)
+                        if self.ledger:
+                            settled = True
+                            self.ledger.settle(reserve, usage)
+                        # Agent may return immediately on turn_end. Release the
+                        # HTTP context before handing that event to the consumer.
+                        await stream.aclose()
+                        yield event
+                        return
+                    yield event
         finally:
             if self.ledger and not settled:
                 self.ledger.settle(reserve, usage)

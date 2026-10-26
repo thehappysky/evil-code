@@ -1,0 +1,16 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+__________ test_unavailable_engine_exit_one_is_not_candidate_failure __________
+tests\test_evals\test_docker_grader.py:70: in test_unavailable_engine_exit_one_is_not_candidate_failure
+    assert result.passed is None
+E   AssertionError: assert False is None
+E    +  where False = Grade(kind='python_function', passed=False, reason='candidate_execution_failed').passed
+_______ test_turn_end_closes_underlying_stream_before_agent_can_return ________
+tests\test_evals\test_foundation.py:217: in test_turn_end_closes_underlying_stream_before_agent_can_return
+    assert state["closed"], "Agent returns at turn_end; network stream must already be closed"
+E   AssertionError: Agent returns at turn_end; network stream must already be closed
+E   assert False
+=========================== short test summary info ===========================
+FAILED tests/test_evals/test_docker_grader.py::test_unavailable_engine_exit_one_is_not_candidate_failure
+FAILED tests/test_evals/test_foundation.py::test_turn_end_closes_underlying_stream_before_agent_can_return
+2 failed in 0.48s

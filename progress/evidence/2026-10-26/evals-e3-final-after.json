@@ -1,0 +1,18 @@
+{
+  "label": "E3 修复流关闭及 Docker 误分类：最终完整回归",
+  "base_commit": "99513f42b815d9a2078e42a725b96c7dd34756a7",
+  "python": "3.12.6",
+  "platform": "Windows",
+  "tests": 1136,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 1136,
+  "junit_seconds": 116.618,
+  "pytest_seconds": 116.82,
+  "coverage": {
+    "covered_lines": 8384,
+    "num_statements": 11245,
+    "percent_covered": 74.55758114717652
+  }
+}

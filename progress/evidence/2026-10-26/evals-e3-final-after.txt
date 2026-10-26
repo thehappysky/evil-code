@@ -1,0 +1,181 @@
+........................................................................ [  6%]
+........................................................................ [ 12%]
+........................................................................ [ 19%]
+........................................................................ [ 25%]
+........................................................................ [ 31%]
+........................................................................ [ 38%]
+........................................................................ [ 44%]
+........................................................................ [ 50%]
+........................................................................ [ 57%]
+........................................................................ [ 63%]
+........................................................................ [ 69%]
+........................................................................ [ 76%]
+........................................................................ [ 82%]
+........................................................................ [ 88%]
+........................................................................ [ 95%]
+........................................................                 [100%]
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.12.6-final-0 _______________
+
+Name                                          Stmts   Miss  Cover   Missing
+---------------------------------------------------------------------------
+code_agent\__init__.py                            1      0   100%
+code_agent\api\__init__.py                        2      0   100%
+code_agent\api\backends\__init__.py              10      0   100%
+code_agent\api\backends\base.py                  24      0   100%
+code_agent\api\backends\chat_completions.py      43      5    88%   98-101, 113
+code_agent\api\backends\messages.py             127      9    93%   146, 151-152, 287-288, 314-318
+code_agent\api\backends\responses.py             70     12    83%   76-86, 123, 171, 174, 209-211
+code_agent\api\client.py                        151     45    70%   100, 159, 191, 210, 239, 251-286, 296, 307-310, 319-321, 365-374
+code_agent\api\client_factory.py                  7      1    86%   37
+code_agent\api\schemas.py                        45      0   100%
+code_agent\api\sse.py                            44      3    93%   93, 95-96
+code_agent\auth\__init__.py                       5      0   100%
+code_agent\auth\config_store.py                 132     32    76%   89-90, 100-120, 127-130, 148-152, 248-253, 258-259
+code_agent\auth\settings_store.py                30      0   100%
+code_agent\auth\token_refresh.py                 39      3    92%   81, 89-90
+code_agent\auth\token_store.py                   48     10    79%   47, 70, 90-96, 101-103
+code_agent\auth\vault.py                        110     14    87%   79-80, 85-87, 108-115, 303
+code_agent\cli\__init__.py                        0      0   100%
+code_agent\cli\args.py                           29      0   100%
+code_agent\cli\assembly.py                      342    149    56%   391-398, 442-444, 470, 484-599, 613-669, 709-710, 720-721, 730-731, 742-743, 753-754, 759-760, 765-768, 775-776, 792-793, 800-801, 806-809, 856-868
+code_agent\cli\auth.py                           81     30    63%   42, 72-90, 116-119, 160, 170-180
+code_agent\cli\execution.py                      90     48    47%   42, 44, 51, 53-58, 73-120
+code_agent\cli\headless.py                       63      9    86%   78-79, 130-136, 173, 176-177
+code_agent\cli\main.py                          207     88    57%   147-162, 194-198, 206-214, 222-237, 240-246, 316, 321-322, 327-329, 379-380, 385-389, 394-398, 403, 410-411, 437-438, 453, 469-512, 516
+code_agent\cli\subcommands\__init__.py            4      0   100%
+code_agent\cli\subcommands\config.py            110      0   100%
+code_agent\cli\subcommands\draft.py              47     42    11%   13-67
+code_agent\cli\subcommands\sandbox.py            45     40    11%   13-60
+code_agent\compaction\__init__.py                 4      0   100%
+code_agent\compaction\assembler.py               39      0   100%
+code_agent\compaction\policy.py                  25      0   100%
+code_agent\compaction\summarizer.py              87      5    94%   110, 127, 154, 169-174
+code_agent\config\__init__.py                     3      0   100%
+code_agent\config\settings_writer.py             76      4    95%   183-186
+code_agent\core\__init__.py                       3      0   100%
+code_agent\core\agent.py                        172     19    89%   66-68, 126, 147, 166, 210, 233-236, 248, 278-279, 331, 342-344, 347, 358-359
+code_agent\core\exceptions.py                    14      0   100%
+code_agent\core\hooks.py                         23      3    87%   67, 77, 98
+code_agent\core\messages.py                      23      0   100%
+code_agent\core\plan_mode.py                     77      6    92%   100-101, 104-105, 127-128
+code_agent\core\session.py                      144     33    77%   158, 160, 175-184, 205-259
+code_agent\evals\__init__.py                      0      0   100%
+code_agent\evals\__main__.py                      2      2     0%   1-3
+code_agent\evals\cli.py                         128     31    76%   35-37, 80, 86-109, 118-120, 126, 145-147, 156
+code_agent\evals\clients.py                      86      5    94%   30, 57-58, 97, 101
+code_agent\evals\docker_grader.py                67     12    82%   78-81, 85, 89-90, 96-100
+code_agent\evals\fixtures.py                     18      0   100%
+code_agent\evals\graders.py                      24      0   100%
+code_agent\evals\guard.py                        42      3    93%   26, 29, 34
+code_agent\evals\metrics.py                      53      2    96%   27, 35
+code_agent\evals\report.py                       66      1    98%   80
+code_agent\evals\runner.py                      130     16    88%   93-94, 99, 103, 109-114, 141, 147-148, 167-168, 170
+code_agent\evals\schema.py                       86      4    95%   40, 42, 67, 106
+code_agent\helpers\__init__.py                    4      0   100%
+code_agent\helpers\file_io.py                    19      6    68%   37-42
+code_agent\helpers\resilience.py                190     10    95%   90, 107, 132-134, 233-234, 385-387
+code_agent\helpers\text_truncate.py              35      2    94%   87, 91
+code_agent\helpers\token_counter.py               6      0   100%
+code_agent\hooks\__init__.py                      2      0   100%
+code_agent\hooks\dispatcher.py                   49      1    98%   131
+code_agent\hooks\doom_loop_hook.py               24      2    92%   40-41
+code_agent\hooks\memory_write_hook.py            54      2    96%   90-91
+code_agent\hooks\phase2_hooks.py                177     11    94%   148-149, 284, 299-300, 355, 372-373, 380, 386-387
+code_agent\hooks\phase3_hooks.py                 44      4    91%   46-47, 145-146
+code_agent\hooks\phase4_hooks.py                113     26    77%   117, 134-135, 170-171, 183-184, 203-204, 227-228, 237-238, 249-250, 275-276, 283-284, 294-295, 318, 320-323
+code_agent\hooks\project_rules_hook.py           18      2    89%   36-37
+code_agent\mcp\__init__.py                        4      0   100%
+code_agent\mcp\adapter.py                        65      4    94%   109-110, 131, 133
+code_agent\mcp\client.py                         86      1    99%   101
+code_agent\mcp\transport.py                      96      5    95%   145-147, 149-150
+code_agent\memory\__init__.py                     5      0   100%
+code_agent\memory\chunker.py                     65      2    97%   174-175
+code_agent\memory\file_store.py                  76      9    88%   74-76, 94-96, 165-167
+code_agent\memory\index_db.py                   127     12    91%   78-79, 84, 163-164, 236, 253-254, 271, 284, 289-290
+code_agent\memory\search.py                      50      4    92%   80, 104, 120, 124
+code_agent\permission\__init__.py                 8      4    50%   11-14
+code_agent\permission\manager.py                112      0   100%
+code_agent\permission\rules.py                   64      7    89%   100, 133, 141, 164, 168, 188-189
+code_agent\permission\safe_commands.py           65     17    74%   96-98, 105-114, 117, 121, 150-152
+code_agent\permission\ssrf.py                    53     14    74%   51, 67-75, 89, 93-94, 109
+code_agent\plugins\__init__.py                    4      0   100%
+code_agent\plugins\loader.py                     93     10    89%   85-89, 94-95, 160, 179-180, 208-209, 245
+code_agent\plugins\models.py                     13      0   100%
+code_agent\plugins\registry.py                   32      1    97%   87
+code_agent\prompts\__init__.py                    2      0   100%
+code_agent\prompts\main.py                       10      0   100%
+code_agent\prompts\markers.py                     3      0   100%
+code_agent\prompts\reminders.py                  76      1    99%   133
+code_agent\prompts\rules.py                      20      2    90%   47-48
+code_agent\runtime\__init__.py                    2      0   100%
+code_agent\runtime\session.py                    36      3    92%   36-38
+code_agent\sandbox\__init__.py                    2      0   100%
+code_agent\sandbox\config.py                     58      2    97%   70-71
+code_agent\sandbox\docker_exec.py                50     16    68%   99-108, 118, 127-134, 149-150
+code_agent\sandbox\draft.py                     143     21    85%   79-80, 82-85, 102-103, 124, 154-155, 174, 195, 212, 217, 237-241, 265, 273-274
+code_agent\sandbox\manager.py                   416    217    48%   83, 123, 127, 131, 146-164, 167-187, 203, 269, 275, 290-344, 363-405, 415-453, 463-471, 519-520, 551, 559-572, 575-583, 589, 596-597, 599, 606-609, 631-676, 679-690, 706, 717-728, 731-740, 743-751, 755-765, 787, 790, 793, 797-808, 812-822
+code_agent\sandbox\policy.py                    120     20    83%   127, 158-164, 169-173, 179-180, 186, 194, 203, 212, 231, 241-242
+code_agent\sandbox\proxy.py                     151     29    81%   76, 86, 114, 118-119, 143-148, 154-156, 160-161, 185-187, 209-211, 220-225, 276-277, 282-283
+code_agent\sandbox\state.py                      96     24    75%   39-40, 48, 62, 69-70, 74-75, 92-93, 104-105, 115-120, 123-128
+code_agent\skills\__init__.py                     5      0   100%
+code_agent\skills\discovery.py                   58      5    91%   109, 115-117, 121
+code_agent\skills\manager.py                     86     10    88%   133-134, 162-163, 173-175, 182-183, 208
+code_agent\skills\models.py                      10      0   100%
+code_agent\skills\parser.py                      82     14    83%   105, 147, 150, 157, 161-166, 171, 196, 211, 216
+code_agent\storage\__init__.py                    4      0   100%
+code_agent\storage\file_lock.py                  65     13    80%   34-49, 118, 135-136
+code_agent\storage\models.py                     14      1    93%   31
+code_agent\storage\session_store.py             224     42    81%   123-124, 133-135, 156-157, 171-176, 205-210, 239-240, 279, 282, 291-292, 316, 326-327, 352-353, 379-380, 394, 398-400, 409-411, 467-474, 482
+code_agent\subagents\__init__.py                  4      0   100%
+code_agent\subagents\capabilities.py             15      1    93%   51
+code_agent\subagents\coordinator.py              24      0   100%
+code_agent\subagents\factory.py                  37      2    95%   81, 120
+code_agent\telemetry\__init__.py                  3      0   100%
+code_agent\telemetry\logger.py                   61      4    93%   96-97, 182, 207
+code_agent\telemetry\tracer.py                   59     39    34%   49-53, 58-59, 62, 67-73, 76-82, 86, 97-110, 117-126, 130
+code_agent\telemetry\usage.py                    31      0   100%
+code_agent\telemetry\usage_stats.py               2      0   100%
+code_agent\todo\__init__.py                       5      0   100%
+code_agent\todo\controller.py                    11      1    91%   27
+code_agent\todo\hook.py                          35      4    89%   74-75, 84-85
+code_agent\todo\state.py                         58      2    97%   75, 112
+code_agent\todo\tool.py                          22      0   100%
+code_agent\tools\__init__.py                      4      0   100%
+code_agent\tools\builtin\__init__.py              0      0   100%
+code_agent\tools\builtin\file_delete.py          32      2    94%   89-90
+code_agent\tools\builtin\file_edit.py            50      9    82%   53, 56, 59, 64, 72-73, 101-102, 116
+code_agent\tools\builtin\file_glob.py            73     15    79%   60, 93-98, 119-120, 141-142, 149-150, 158-162
+code_agent\tools\builtin\file_read.py            39      5    87%   45, 57-58, 63-64
+code_agent\tools\builtin\file_search.py          90     51    43%   46, 54, 80-84, 95-98, 105-161
+code_agent\tools\builtin\file_write.py           56     12    79%   62, 69, 82-83, 88-89, 94-95, 101-102, 126, 129
+code_agent\tools\builtin\shell_exec.py           54     11    80%   56, 70-91, 115
+code_agent\tools\builtin\task.py                 13      0   100%
+code_agent\tools\builtin\web_fetch.py            76      8    89%   64, 89, 107, 124-128, 146
+code_agent\tools\builtin\web_search.py           50      1    98%   54
+code_agent\tools\definition.py                   19      1    95%   80
+code_agent\tools\registry.py                     58      1    98%   160
+code_agent\tools\result.py                       13      0   100%
+code_agent\tui\__init__.py                        2      0   100%
+code_agent\tui\adapters.py                      317     95    70%   103-108, 154, 170, 188, 196-198, 208-209, 260, 315, 326-327, 353-368, 402, 406, 412-423, 451, 455, 489-492, 557, 566-580, 584, 587-610, 619, 623, 629, 635, 639, 645, 650-665, 681-700, 714-716
+code_agent\tui\commands.py                       43      6    86%   25, 79, 83, 92-94
+code_agent\tui\domain.py                        722    194    73%   62, 67, 135, 139, 142-146, 161-168, 185-191, 194-203, 206-217, 226, 245-256, 263-272, 319, 331, 401, 444-445, 497-506, 515, 520, 531-537, 540, 554-560, 571, 578-584, 588-610, 613-618, 621-626, 640, 644, 648, 664-665, 668, 692, 709-722, 738, 751, 777, 879, 884, 886, 888, 890, 892, 894, 898, 900, 910, 913, 915, 931-946, 955-956, 969-974, 990, 1000-1005, 1008-1012, 1022, 1024-1027, 1215-1216
+code_agent\tui\rendering\__init__.py              2      0   100%
+code_agent\tui\rendering\tool_feedback.py       239    152    36%   35, 48-51, 55-71, 74-196, 199-219, 227-229, 233, 241-248, 260-264, 280-312, 336-337, 420, 429-503, 512, 516-524
+code_agent\tui\screens\__init__.py                6      0   100%
+code_agent\tui\screens\approval.py               33     13    61%   78-80, 83, 133, 136-143, 146, 149-150, 153
+code_agent\tui\screens\provider.py              334    155    54%   394, 396, 405-447, 452, 475-488, 520, 538, 552-572, 583-623, 626, 636-681, 684-704, 713-718, 734, 764, 780-782, 796, 815-824, 827, 844, 896-899, 908-918, 921-930, 941-950, 953-955, 958
+code_agent\tui\screens\reasoning.py              40     20    50%   77-80, 85-101, 104-112, 120-121, 124-126, 129
+code_agent\tui\screens\session.py                63     43    32%   66-70, 79-107, 113-123, 145-154, 157-159, 162
+code_agent\tui\screens\settings.py               55     22    60%   106-112, 115, 168-170, 173-176, 179, 215-220, 223-231, 234
+code_agent\tui\stores.py                        180     80    56%   66-67, 79-80, 92-93, 116, 120, 134-136, 139, 198-203, 233-236, 240-246, 254-298, 303-323
+code_agent\tui\text.py                           16      1    94%   628
+code_agent\tui\tui.py                          1364    639    53%   161-162, 180, 192, 230-239, 481, 499, 501, 510, 520, 581, 607, 609-610, 627, 633, 639-642, 647, 651, 659, 661-662, 664-665, 671-672, 698-706, 709-726, 732-736, 756-769, 781-847, 853-910, 918-933, 941-955, 959-960, 964-968, 971-982, 985-988, 992-994, 1018, 1021-1025, 1027-1028, 1030-1034, 1060-1061, 1078-1083, 1085-1086, 1088-1092, 1094-1095, 1097-1101, 1103-1104, 1106-1107, 1109-1110, 1112, 1152-1154, 1168-1169, 1171-1172, 1174-1175, 1177-1178, 1183-1184, 1191-1192, 1222-1223, 1240-1273, 1281-1282, 1290-1291, 1304-1353, 1358, 1361, 1365-1366, 1370, 1386-1395, 1419-1420, 1422-1423, 1425-1432, 1439-1440, 1446-1448, 1454-1460, 1462, 1476-1479, 1490-1491, 1494-1496, 1519-1520, 1527-1548, 1562-1563, 1571-1577, 1586-1587, 1589-1590, 1593-1600, 1604-1605, 1611-1613, 1624-1625, 1634, 1658, 1674-1698, 1704-1715, 1723-1724, 1727-1776, 1788-1818, 1821-1852, 1855-1882, 1889-1950, 1953-1975, 1981-1988, 2000-2005, 2013-2033, 2047-2049, 2052-2076, 2079-2081, 2167-2175, 2196-2201, 2216, 2226, 2240, 2252, 2267-2272, 2288-2295, 2326-2336, 2361-2362, 2463-2464, 2494, 2513, 2519, 2529-2534, 2552-2557
+code_agent\tui\widgets\__init__.py                3      0   100%
+code_agent\tui\widgets\conversation.py           35      9    74%   17, 52-53, 56-57, 60-62, 65
+code_agent\tui\widgets\suggester.py              13      1    92%   24
+---------------------------------------------------------------------------
+TOTAL                                         11245   2861    75%
+Coverage JSON written to file .pytest-tmp/evals-e3-final-coverage.json
+Required test coverage of 60% reached. Total coverage: 74.56%
+1136 passed in 116.82s (0:01:56)

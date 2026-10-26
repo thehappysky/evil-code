@@ -1,0 +1,18 @@
+{
+  "label": "E3 补充清理测试前的中间回归",
+  "base_commit": "99513f42b815d9a2078e42a725b96c7dd34756a7",
+  "python": "3.12.6",
+  "platform": "Windows",
+  "tests": 1135,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 1135,
+  "junit_seconds": 117.729,
+  "pytest_seconds": 118.4,
+  "coverage": {
+    "covered_lines": 8382,
+    "num_statements": 11245,
+    "percent_covered": 74.53979546465095
+  }
+}

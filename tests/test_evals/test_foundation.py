@@ -198,3 +198,22 @@ async def test_budget_rejection_happens_before_underlying_request():
 def test_redaction_removes_credentials():
     result = redact({"api_key":"secret", "body":"sk-abcdefghijklmnopqrstuv", "path":"/tmp/work/file"}, "/tmp/work")
     assert result == {"api_key":"[REDACTED]", "body":"[REDACTED]", "path":"<workspace>/file"}
+
+
+async def test_turn_end_closes_underlying_stream_before_agent_can_return():
+    tasks, _ = load_tasks(ROOT / "evals/datasets/core-v1.jsonl")
+    state = {"closed":False}
+    class Streaming(FixtureClient):
+        async def chat_stream(self, *a, **kw):
+            try:
+                yield StreamEvent(kind="turn_end")
+                await asyncio.sleep(100)
+            finally:
+                state["closed"] = True
+    observed = ObservedClient(Streaming(tasks[0]))
+    stream = observed.chat_stream([], [])
+    try:
+        assert (await anext(stream)).kind == "turn_end"
+        assert state["closed"], "Agent returns at turn_end; network stream must already be closed"
+    finally:
+        await stream.aclose()

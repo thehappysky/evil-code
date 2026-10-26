@@ -25,7 +25,27 @@ async def bounded_read(stream):
     return bytes(data)
 
 
+async def image_available():
+    proc = None
+    try:
+        # Windows Docker may return 1 for an absent engine, which is also a
+        # candidate's valid failure code. Check infrastructure independently.
+        proc = await asyncio.create_subprocess_exec(
+            "docker", "image", "inspect", "python:3.12-slim",
+            stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL,
+        )
+        return await asyncio.wait_for(proc.wait(), 5) == 0
+    except (OSError, asyncio.TimeoutError):
+        return False
+    finally:
+        if proc is not None and proc.returncode is None:
+            proc.kill()
+            await proc.wait()
+
+
 async def docker_grade(check, workspace, timeout=10):
+    if not await image_available():
+        return Grade(kind="python_function", passed=None, reason="docker_unavailable_or_image_missing")
     name = "evil-eval-" + uuid.uuid4().hex[:16]
     proc = None
     readers = []
