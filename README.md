@@ -351,6 +351,33 @@ MCP 工具在连接与发现后加入注册表，不能假定外部工具是只�
 
 自动测试使用模拟模型响应。真实模型、真实 Docker 与远程 MCP 完整任务不在本轮验证范围内；GitHub Actions 另外运行 Windows / Python 3.11 和 3.13 的安装及测试。
 
+## 大模型与 Agent 评测
+
+评测已接入真实 Agent 循环，使用 **16 项公开开发任务 + 2 项独立代码修复任务**。覆盖文件理解、结构化输出、多步骤编辑、只读约束、提示注入与异常恢复。按最终文件和结果判题，另外记录工具错误、越权尝试、重复稳定性、pass@k、P50/P95、Token 和估算成本。
+
+| 从哪里开始 | 内容 |
+| --- | --- |
+| [评测手册与流程图](docs/evaluation.md) | 安装、真实调用、预算、判题口径、HTML 报告、人工复核与实验比较 |
+| [建设方案](design-docs/LLM-Evaluation-Plan.md) | 分阶段目标、数据设计、指标、准入和后续规划 |
+| [进度与前后数据](progress/evaluation-2026-10-26.md) | 每批软件测试、离线反例、真实模型结果与验证边界 |
+| [开发集说明](evals/README.md) | 数据版本、公开答案、污染边界和评分局限 |
+
+```powershell
+# 在已安装项目的隔离环境内执行；每次使用新输出目录
+python -m code_agent.evals validate
+python -m code_agent.evals run --mode reference --repeats 2 --output .eval-runs/reference --fail-under 1
+python -m code_agent.evals run --mode noop --repeats 2 --output .eval-runs/noop
+# 查看输出目录中的 report.html、summary.json 和 trials.csv
+```
+
+离线参考执行 32/32、不操作反例 0/32，只证明评测流程能区分完成与未完成，**不代表大模型能力**。真实模型使用本机配置、显式价格表和请求前费用预留；原始轨迹默认留在本地，公开数据采用白名单汇总。代码题要求 Docker，环境不可用时记录基础设施问题，不在宿主机执行候选代码。当前结果仅代表四种文件工具的受限配置，未覆盖完整产品工具链。
+
+2026-10-26 真实开发集实测：本机配置的 DeepSeek V4 Pro 完成 **30/32（93.75%）**；两次文件迁移失败保留，分析发现读取工具没有呈现末尾换行。两轮真实实验合计估算 **0.352254 元**，低于 5 元授权。小样本分数不代表总体排名；Docker 代码题因引擎不可用，尚无真实容器成绩。
+
+![真实模型评测报告顶部，非模拟数据](docs/assets/evaluation-report.png)
+
+详见 [真实评测结果、分类数据与失败归因](progress/evaluation-results-2026-10-26.md)；完整 [HTML 报告](progress/evidence/2026-10-26/live-core-report.html) 与 [逐次 CSV](progress/evidence/2026-10-26/live-core-trials.csv) 可下载查看。图片来自实际生成的报告，重建脚本为 `scripts/capture_evaluation.cjs`。
+
 ## 项目结构与阅读顺序
 
 ```text
@@ -358,6 +385,7 @@ code_agent/
 ├── cli/           入口、父代理装配、子命令
 ├── tui/           终端界面、交互控制、展示适配器
 ├── runtime/       客户端与 Agent 的共享生命周期
+├── evals/         任务执行、判题、指标、预算、报告与比较
 ├── core/          推理循环、会话、消息、计划状态
 ├── api/           模型协议、HTTP、SSE
 ├── tools/         工具定义、注册和执行

@@ -1,0 +1,4 @@
+an error occurred during closing of asynchronous generator <async_generator object AsyncClient.stream at 0x000001B0D4AEE8E0>
+asyncgen: <async_generator object AsyncClient.stream at 0x000001B0D4AEE8E0>
+RuntimeError: aclose(): asynchronous generator is already running
+{"mode": "live", "output": ".eval-runs\\live-deepseek-20261026", "successes": 6, "recorded": 6, "planned": 6, "statuses": {"success": 6}, "estimated_cost_cny": 0.0667788}

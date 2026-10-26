@@ -1,5 +1,9 @@
 # Project Progress Summary
 
+> 当前进展（2026-10-26）：大模型 / Agent 评测已交付，软件 1137 通过、74.59% 覆盖率；真实核心开发集 30/32，合计真实费用估算 0.352254 元。最终 CI 中旧 Docker 测试的环境依赖已复现并修正。见 [当日进度](evaluation-2026-10-26.md) 与 [结果分析](evaluation-results-2026-10-26.md)。
+
+以下为 2026-08-06 的历史总结，测试数、环境和完成声明不作为当前验收结论。
+
 > 最后更新: 2026-08-06 | Python AI Coding Agent (evil-code)
 > 上一会话完成内容: **Phase B 收敛 deferred import 完成(89→15, -83%, 0 循环依赖, 280 顶层边可见)**
 > 更早: Phase A 上帝文件拆分 + file_delete 工具 + Phase 5 补足方案 0-7 + 提示词集中(Evil) + 有效性测试 + 项目规则发现 + 全链路审计修复

@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "D:\Pycharm_py\evil-code\.pytest-tmp\reproduce-ci-docker.py", line 10, in <module>
+    asyncio.run(main())
+  File "D:\Python\python_version\python3.12.6\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "D:\Python\python_version\python3.12.6\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\python_version\python3.12.6\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\Pycharm_py\evil-code\.pytest-tmp\reproduce-ci-docker.py", line 9, in main
+    await module['TestDockerSandbox']().test_execute_without_docker_returns_error()
+  File "tests/test_sandbox/test_docker.py", line 29, in test_execute_without_docker_returns_error
+    assert "error" in result.output.lower() or "not installed" in result.output.lower()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

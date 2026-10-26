@@ -38,3 +38,6 @@ settings.local.json
 
 # Scratch files used for manual verification
 test_workspace/
+
+# Private evaluation traces, workspaces and credentials must not be published.
+.eval-runs/

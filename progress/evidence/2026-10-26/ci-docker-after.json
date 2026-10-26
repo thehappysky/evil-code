@@ -1,0 +1,13 @@
+{
+  "label": "E5 Docker 不可用两种场景及原有配置检查",
+  "base_commit": "cde8fda12d55f3e18e7b9abdc9d756e258a11a14",
+  "python": "3.12.6",
+  "platform": "Windows",
+  "tests": 5,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 5,
+  "junit_seconds": 0.6,
+  "pytest_seconds": 0.76
+}

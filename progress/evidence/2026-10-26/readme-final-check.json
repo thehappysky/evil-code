@@ -1,0 +1,18 @@
+{
+  "lines": 415,
+  "sections": 11,
+  "images": 2,
+  "mermaid_diagrams": 4,
+  "local_links_checked": 23,
+  "image_sizes": {
+    "docs/assets/tui-demo.png": [
+      1458,
+      977
+    ],
+    "docs/assets/evaluation-report.png": [
+      1200,
+      1100
+    ]
+  },
+  "errors": []
+}

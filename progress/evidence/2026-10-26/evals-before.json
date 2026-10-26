@@ -1,0 +1,18 @@
+{
+  "label": "evals-baseline",
+  "base_commit": "f58c04c2469873dd0bf2aef5aa5772e52d8831c9",
+  "python": "3.12.6",
+  "platform": "Windows",
+  "tests": 1090,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 1090,
+  "junit_seconds": 105.92,
+  "pytest_seconds": 106.15,
+  "coverage": {
+    "covered_lines": 7750,
+    "num_statements": 10540,
+    "percent_covered": 73.52941176470588
+  }
+}

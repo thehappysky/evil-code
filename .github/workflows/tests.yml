@@ -29,3 +29,13 @@ jobs:
         run: python scripts/check_readme.py
       - name: Run tests and coverage gate
         run: python -m pytest -q --tb=short
+      - name: Validate evaluation tasks and run offline harness gate
+        run: |
+          python -m code_agent.evals validate
+          python -m code_agent.evals run --mode reference --repeats 2 --output .eval-runs/ci-reference --fail-under 1
+          python -m code_agent.evals export --run .eval-runs/ci-reference --output .eval-runs/ci-summary.json
+      - name: Upload content-free evaluation summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-summary-python-${{ matrix.python-version }}
+          path: .eval-runs/ci-summary.json

@@ -1,0 +1,75 @@
+{
+  "software_commit": "9d64f41e1935d9b2ec67447e8fd6db1c50f44973",
+  "working_tree_dirty_at_run_start": false,
+  "authorized_total_cny": 5,
+  "initial_estimated_cny": 0.0667788,
+  "second_run_limit_cny": 4.9,
+  "core_estimated_cny": 0.2854752,
+  "total_estimated_cny": 0.352254,
+  "requests": 93,
+  "unsettled_usage_requests": 0,
+  "core_close_warning_observed": false,
+  "failed_cases": [
+    {
+      "task_id": "move-file",
+      "attempt": 1,
+      "status": "task_failure",
+      "expected_characters": 18,
+      "actual_characters": 17,
+      "expected_final_newline": true,
+      "actual_final_newline": false,
+      "grades": [
+        {
+          "kind": "file_equals",
+          "passed": false,
+          "reason": "outcome_mismatch"
+        },
+        {
+          "kind": "file_absent",
+          "passed": true,
+          "reason": "absence_checked"
+        },
+        {
+          "kind": "scope",
+          "passed": true,
+          "reason": "scope_checked"
+        }
+      ]
+    },
+    {
+      "task_id": "move-file",
+      "attempt": 2,
+      "status": "task_failure",
+      "expected_characters": 18,
+      "actual_characters": 17,
+      "expected_final_newline": true,
+      "actual_final_newline": false,
+      "grades": [
+        {
+          "kind": "file_equals",
+          "passed": false,
+          "reason": "outcome_mismatch"
+        },
+        {
+          "kind": "file_absent",
+          "passed": true,
+          "reason": "absence_checked"
+        },
+        {
+          "kind": "scope",
+          "passed": true,
+          "reason": "scope_checked"
+        }
+      ]
+    }
+  ],
+  "file_read_hides_final_newline": true,
+  "interpretation": "迁移结果确实不一致，保留任务失败；读取工具丢失末尾换行信息，不能把端到端失败全部归因于模型。未放宽判题或改题。",
+  "tool_error_trials": [
+    {
+      "task_id": "missing-recovery",
+      "attempt": 1,
+      "tool_errors": 1
+    }
+  ]
+}

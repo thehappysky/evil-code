@@ -1,0 +1,16 @@
+{
+  "label": "E5 GitHub PR 检查：旧 Docker 文案断言失败",
+  "commit": "cde8fda12d55f3e18e7b9abdc9d756e258a11a14",
+  "python": "3.11.9",
+  "platform": "Windows / GitHub Actions",
+  "run_id": 40285215810,
+  "job_id": 121447138977,
+  "passed": 1135,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "coverage_percent": 74.5,
+  "pytest_seconds": 108.3,
+  "source": "https://github.com/thehappysky/evil-code/actions/runs/40285215810/job/121447138977",
+  "reason": "Docker 返回 failed to connect；is_error 已为 true，旧测试依赖 error 单词而失败。未修改实际产品执行逻辑。"
+}

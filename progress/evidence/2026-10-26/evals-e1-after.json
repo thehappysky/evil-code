@@ -1,0 +1,18 @@
+{
+  "label": "evals-e1-after",
+  "base_commit": "24e73fcb04101cf60a39224fd4227ed9fa2d5c46",
+  "python": "3.12.6",
+  "platform": "Windows",
+  "tests": 1114,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 1114,
+  "junit_seconds": 149.679,
+  "pytest_seconds": 150.3,
+  "coverage": {
+    "covered_lines": 8149,
+    "num_statements": 10963,
+    "percent_covered": 74.33184347350178
+  }
+}

@@ -1,9 +1,9 @@
 # Code Agent - Implementation Progress
 
-> Current increment: runtime batch A passed (1081 → 1090 tests; coverage 73.26% → 73.53%). README batch B also passed: 1090 tests, 73.53% coverage, one UI image and four diagrams.
-> Evidence and acceptance decisions: [progress log](progress/runtime-docs-2026-10-23.md).
+> 当前增量（2026-10-26）：Agent 评测软件 1137 项通过、覆盖率 74.59%；真实核心开发集 30/32，两次迁移丢失末尾换行保留失败；真实调用合计估算 0.352254 元。Docker 代码任务尚无可判定结果；旧 Docker 测试的环境依赖已另行修正留痕。
+> [建设进度与前后对比](progress/evaluation-2026-10-26.md) / [真实数据与失败分析](progress/evaluation-results-2026-10-26.md)。旧运行时批次见 [历史记录](progress/runtime-docs-2026-10-23.md)。
 
-> Last updated: 2026-10-23
+> Last updated: 2026-10-26
 > Status: Core features implemented; stabilization in progress. See README.md for current usage.
 > The phase narratives and architecture diagram below are historical records, not evidence of current live-service verification.
 

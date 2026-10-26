@@ -1,0 +1,141 @@
+{
+  "manifest": {
+    "schema_version": 1,
+    "grader_version": "1",
+    "mode": "live",
+    "dataset_sha256": "824e4f0db51f3ea26ab21b43f1d14ec71f3c5bb014ae8ae60b08c59d25d42a1a",
+    "task_ids": [
+      "read-project",
+      "write-config",
+      "edit-config"
+    ],
+    "task_versions": {
+      "read-project": "core-v1",
+      "write-config": "core-v1",
+      "edit-config": "core-v1"
+    },
+    "repeats": 2,
+    "max_turns": 6,
+    "timeout_seconds": 90.0,
+    "system_prompt_sha256": "b1a1bc1094e57e38b7e4b1ce6634e5b84c691fec856cfbc0ec6a166461fb8b09",
+    "tool_names": [
+      "file_read",
+      "file_write",
+      "file_edit",
+      "file_delete"
+    ],
+    "agent_commit": "99513f42b815d9a2078e42a725b96c7dd34756a7",
+    "working_tree_dirty": false,
+    "created_at": "2026-10-26T07:02:58.150047+00:00",
+    "metadata": {
+      "model": "deepseek-v4-pro",
+      "backend": "messages",
+      "max_output_tokens": 4096,
+      "temperature": 0.7,
+      "pricing": {
+        "model": "deepseek-v4-pro",
+        "currency": "CNY",
+        "input_per_million": "9.0",
+        "output_per_million": "27.0",
+        "cached_per_million": "0.30",
+        "source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+        "as_of": "2026-10-26"
+      },
+      "budget_result": {
+        "limit_cny": 5.0,
+        "charged_estimate_cny": 0.0667788,
+        "requests": 14,
+        "missing_usage_requests": 0,
+        "reservation_overrun": false
+      }
+    }
+  },
+  "summary": {
+    "planned_attempts": 6,
+    "recorded_attempts": 6,
+    "not_started": 0,
+    "successes": 6,
+    "end_to_end_success_rate": 1.0,
+    "capability_success_rate": 1.0,
+    "capability_denominator": 6,
+    "excluded_from_capability": 0,
+    "statuses": {
+      "success": 6
+    },
+    "model_error_codes": {},
+    "task_macro_success_rate": 1.0,
+    "task_cluster_ci95": [
+      1.0,
+      1.0
+    ],
+    "small_sample_warning": true,
+    "complete_tasks_for_pass_at_k": 3,
+    "pass@1": 1.0,
+    "pass@2": 1.0,
+    "pass@3": null,
+    "pass@5": null,
+    "all_repeats_success_rate": 1.0,
+    "duration_p50_seconds": 4.307629500020994,
+    "duration_p95_seconds": 5.717497124991496,
+    "success_duration_p50_seconds": 4.307629500020994,
+    "ttft_p50_seconds": 4.115599900018424,
+    "ttft_p95_seconds": 5.192579075010144,
+    "model_calls": 14,
+    "tool_calls": 8,
+    "tool_error_rate": 0.0,
+    "denied_calls": 0,
+    "forbidden_attempts": 0,
+    "actual_unexpected_change_trials": 0,
+    "usage_coverage": 1.0,
+    "known_tokens": {
+      "input_tokens": 33465,
+      "output_tokens": 887,
+      "cached_input_tokens": 29696,
+      "reasoning_tokens": 0,
+      "total_tokens": 34352
+    },
+    "cost_coverage": 1.0,
+    "total_estimated_cost_cny": 0.0667788,
+    "cost_per_success_cny": 0.0111298,
+    "by_category": {
+      "file_edit": {
+        "attempts": 2,
+        "successes": 2,
+        "success_rate": 1.0
+      },
+      "file_write": {
+        "attempts": 2,
+        "successes": 2,
+        "success_rate": 1.0
+      },
+      "understanding": {
+        "attempts": 2,
+        "successes": 2,
+        "success_rate": 1.0
+      }
+    },
+    "by_difficulty": {
+      "easy": {
+        "attempts": 6,
+        "success_rate": 1.0
+      }
+    },
+    "by_task": {
+      "read-project": {
+        "recorded": 2,
+        "successes": 2,
+        "planned": 2
+      },
+      "write-config": {
+        "recorded": 2,
+        "successes": 2,
+        "planned": 2
+      },
+      "edit-config": {
+        "recorded": 2,
+        "successes": 2,
+        "planned": 2
+      }
+    }
+  }
+}

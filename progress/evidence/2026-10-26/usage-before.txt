@@ -1,0 +1,20 @@
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+___________ test_initial_input_and_cache_usage_survive_output_delta ___________
+tests\test_evals\test_usage_stream.py:20: in test_initial_input_and_cache_usage_survive_output_delta
+    assert result[0].usage["prompt_tokens"] == 140
+E   assert 0 == 140
+_____________ test_missing_input_usage_is_unknown_instead_of_zero _____________
+tests\test_evals\test_usage_stream.py:27: in test_missing_input_usage_is_unknown_instead_of_zero
+    assert result[0].usage is None
+E   AssertionError: assert {'prompt_tokens': 0, 'completion_tokens': 12, 'cached_prompt_tokens': 0, 'reasoning_tokens': 0} is None
+E    +  where {'prompt_tokens': 0, 'completion_tokens': 12, 'cached_prompt_tokens': 0, 'reasoning_tokens': 0} = StreamEvent(kind='turn_end', text=None, tool_call=None, usage={'prompt_tokens': 0, 'completion_tokens': 12, 'cached_prompt_tokens': 0, 'reasoning_tokens': 0}).usage
+________________ test_cumulative_output_updates_are_not_summed ________________
+tests\test_evals\test_usage_stream.py:36: in test_cumulative_output_updates_are_not_summed
+    assert result[0].usage["prompt_tokens"] == 15
+E   assert 0 == 15
+=========================== short test summary info ===========================
+FAILED tests/test_evals/test_usage_stream.py::test_initial_input_and_cache_usage_survive_output_delta
+FAILED tests/test_evals/test_usage_stream.py::test_missing_input_usage_is_unknown_instead_of_zero
+FAILED tests/test_evals/test_usage_stream.py::test_cumulative_output_updates_are_not_summed
+3 failed in 0.38s

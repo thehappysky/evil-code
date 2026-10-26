@@ -1,0 +1,13 @@
+{
+  "label": "environment-before",
+  "base_commit": "f58c04c2469873dd0bf2aef5aa5772e52d8831c9",
+  "python": "3.12.6",
+  "platform": "Windows",
+  "tests": 1090,
+  "failures": 2,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 1088,
+  "junit_seconds": 133.359,
+  "pytest_seconds": 133.59
+}
