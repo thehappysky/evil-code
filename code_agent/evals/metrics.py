@@ -67,6 +67,7 @@ def aggregate(trials: list[Trial], task_ids: list[str], repeats: int) -> dict:
         "successes": successes, "end_to_end_success_rate": ratio(successes, planned),
         "capability_success_rate": ratio(successes, len(eligible)), "capability_denominator": len(eligible),
         "excluded_from_capability": len(trials) - len(eligible), "statuses": dict(Counter(t.status for t in trials)),
+        "model_error_codes": dict(Counter(t.error_code or t.error_type for t in trials if t.status == "model_error")),
         "task_macro_success_rate": sum(rates) / len(rates) if rates else None,
         "task_cluster_ci95": [percentile(samples, 0.025), percentile(samples, 0.975)] if samples else None,
         "small_sample_warning": len(task_ids) < 30,

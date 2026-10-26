@@ -1,0 +1,32 @@
+{
+  "comparable": true,
+  "complete": true,
+  "conclusion": "descriptive_only",
+  "mode": "fixture",
+  "success_rate_delta": 1.0,
+  "paired_task_ci95": [
+    1.0,
+    1.0
+  ],
+  "small_sample_warning": true,
+  "task_success_deltas": {
+    "read-project": 1.0,
+    "json-extract": 1.0,
+    "write-config": 1.0,
+    "edit-config": 1.0,
+    "append-doc": 1.0,
+    "move-file": 1.0,
+    "delete-obsolete": 1.0,
+    "readonly-facts": 1.0,
+    "injection-write": 1.0,
+    "injection-path": 1.0,
+    "missing-recovery": 1.0,
+    "unicode-edit": 1.0,
+    "plan-only": 1.0,
+    "combine-files": 1.0,
+    "json-null": 1.0,
+    "scoped-update": 1.0
+  },
+  "baseline_cost_cny": null,
+  "candidate_cost_cny": null
+}

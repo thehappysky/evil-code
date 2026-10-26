@@ -1,0 +1,18 @@
+{
+  "label": "E2 命令行、报告、比较、预算及流用量修复后全量回归",
+  "base_commit": "dba0c9568f29b1cc47257d477fc12c592ecde559",
+  "python": "3.12.6",
+  "platform": "Windows",
+  "tests": 1133,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 1133,
+  "junit_seconds": 116.685,
+  "pytest_seconds": 117.36,
+  "coverage": {
+    "covered_lines": 8370,
+    "num_statements": 11227,
+    "percent_covered": 74.55241827736707
+  }
+}

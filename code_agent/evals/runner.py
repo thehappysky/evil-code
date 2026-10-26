@@ -9,6 +9,7 @@ import re
 import subprocess
 import tempfile
 import time
+import httpx
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -52,6 +53,7 @@ async def run_trial(task, attempt, create_client, *, max_turns=8, timeout=90, le
     started = time.perf_counter()
     ttft = None
     status, error = "task_failure", None
+    error_code = None
     grades, unexpected = [], []
     session = Session(SYSTEM)
     observer = None
@@ -86,6 +88,10 @@ async def run_trial(task, attempt, create_client, *, max_turns=8, timeout=90, le
             messages = session.to_api_messages()
             response = next((m.get("content") or "" for m in reversed(messages) if m["role"] == "assistant"), "")
             grades = grade(task, root, response)
+            for index, check in enumerate(task.checks):
+                if check.kind == "python_function":
+                    from code_agent.evals.docker_grader import docker_grade
+                    grades[index] = await docker_grade(check, root)
             after = snapshot(root)
             unexpected = sorted(path for path in before.keys() | after.keys() if before.get(path) != after.get(path) and path not in task.allowed_writes)
             grades.append(Grade(kind="scope", passed=not unexpected and not guard.forbidden, reason="scope_checked"))
@@ -95,8 +101,9 @@ async def run_trial(task, attempt, create_client, *, max_turns=8, timeout=90, le
                 status = "success"
         except BudgetExceeded:
             status, error = "budget_exceeded", "BudgetExceeded"
-        except (ModelFailure, AuthenticationError) as exc:
+        except (ModelFailure, AuthenticationError, httpx.HTTPError) as exc:
             status, error = "model_error", type(exc).__name__
+            error_code = getattr(exc, "code", None)
         except asyncio.TimeoutError:
             status, error = "timeout", "TimeoutError"
         except MaxTurnsReached:
@@ -119,7 +126,7 @@ async def run_trial(task, attempt, create_client, *, max_turns=8, timeout=90, le
                 forbidden_attempts=guard.forbidden, unexpected_changes=unexpected,
                 usage=observer.complete_usage() if observer else None,
                 cost_cny=float(ledger.charged - before_cost) if ledger else None,
-                grades=grades, error_type=error,
+                grades=grades, error_type=error, error_code=error_code,
             )
             if artifact_dir:
                 artifact_dir.mkdir(parents=True, exist_ok=True)
@@ -142,6 +149,7 @@ async def run_suite(tasks, dataset_hash, output, create_client, *, mode, repeats
     manifest = {
         "schema_version": 1, "grader_version": "1", "mode": mode,
         "dataset_sha256": dataset_hash, "task_ids": [t.id for t in tasks],
+        "task_versions": {t.id:t.version for t in tasks},
         "repeats": repeats, "max_turns": max_turns, "timeout_seconds": timeout,
         "system_prompt_sha256": hashlib.sha256(SYSTEM.encode()).hexdigest(),
         "tool_names": evaluation_tools().list_names(), "agent_commit": commit, "working_tree_dirty": dirty,

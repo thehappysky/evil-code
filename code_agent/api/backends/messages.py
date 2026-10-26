@@ -224,14 +224,16 @@ class MessagesBackend:
         block_to_tool: dict[int, int] = {}
         next_tool_index = 0
         turn_end_yielded = False
+        cumulative_usage: dict = {}
 
         async for event in sse_events:
             event_type = event.get("_event", "")
             data = {k: v for k, v in event.items() if k != "_event"}
 
             if event_type == "message_start":
-                # Initial message info — no StreamEvent yet
-                pass
+                # Input/cache counters arrive here; message_delta often only
+                # includes cumulative output tokens. Preserve both, do not sum.
+                cumulative_usage.update(data.get("message", {}).get("usage") or {})
 
             elif event_type == "content_block_start":
                 idx = data.get("index", 0)
@@ -294,7 +296,11 @@ class MessagesBackend:
 
             elif event_type == "message_delta":
                 delta = data.get("delta", {})
-                usage = normalize_usage(data.get("usage"))
+                latest_usage = data.get("usage") or {}
+                cumulative_usage.update(latest_usage)
+                usage = normalize_usage(cumulative_usage) if latest_usage and all(
+                    key in cumulative_usage for key in ("input_tokens", "output_tokens")
+                ) else None
                 stop_reason = delta.get("stop_reason")
 
                 if stop_reason and not turn_end_yielded:

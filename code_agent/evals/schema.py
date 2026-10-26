@@ -97,6 +97,7 @@ class Trial(StrictModel):
     cost_cny: float | None = None
     grades: list[Grade] = Field(default_factory=list)
     error_type: str | None = None
+    error_code: str | None = None
 
 
 def load_tasks(path: str | Path) -> tuple[list[Task], str]:

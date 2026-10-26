@@ -43,6 +43,7 @@ sandbox = [
 
 [project.scripts]
 code-agent = "code_agent.cli.main:main"
+code-agent-eval = "code_agent.evals.cli:main"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

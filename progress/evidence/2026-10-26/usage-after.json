@@ -1,0 +1,13 @@
+{
+  "label": "Messages 用量修复：同组反例及 API 回归",
+  "base_commit": "dba0c9568f29b1cc47257d477fc12c592ecde559",
+  "python": "3.12.6",
+  "platform": "Windows",
+  "tests": 91,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 91,
+  "junit_seconds": 4.857,
+  "pytest_seconds": 5.05
+}
